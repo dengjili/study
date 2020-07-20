@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	<a th:href="@{/test/addUI}">添加</a>
+	<table th:border="1">
+		<tr>
+			<td>ID</td>         
+			<td>类型</td>         
+			<td>章节</td>         
+			<td>题目</td>         
+			<td>选项</td>
+			<td>图片</td>
+			<td>正确答案</td>
+			<td>答案解析</td>         
+			<td>操作</td>     
+		</tr>
+		<tr th:each="q : ${questions}">
+			<td th:text="${q.id}"></td>
+			<td th:text="${q.type}"></td>
+			<td th:text="${q.chapterId}"></td>
+			<td th:text="${q.question}"></td>
+			<td th:text="${q.iterns}"></td>
+			<td th:text="${q.imgurl}"></td>
+			<td th:text="${q.rightAnswer}"></td>
+			<td th:text="${q.answerAnalysis}"></td>
+			<td>
+				<a th:href="@{/test/updateUI(id=${q.id})}">修改</a>
+				<a th:href="@{/test/delete(id=${q.id})}">删除</a>
+				<a th:href="@{/test/detail(id=${q.id})}">详情查看</a>
+			</td>
+		</tr>
+	</table>
+
+
+
+</body>
+</html>

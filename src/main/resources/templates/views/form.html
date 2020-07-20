@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Thymeleaf示例</title>
+    </head> 
+    <body>
+        <h1>Thymeleaf 示例</h1>
+        <form th:action="@{/saveTest}" method="POST">
+          <label for="firstName">产品名称:</label>
+          <input type="text" name="id" value="" /><br/>
+
+          <label for="firstName2">有效日期:</label>
+          <input type="text"  name="name" value="" /> <br/>        
+
+          <label for="price">价格 (RMB):</label>
+          <input type="text"   name="desc"/><br/>
+          
+          <label for="price">价格 (RMB):</label>
+          <input type="text"  name="age" /><br/>
+
+          <input type="submit" value="提交"/>
+    </form>
+        
+
+    </body>
+</html>

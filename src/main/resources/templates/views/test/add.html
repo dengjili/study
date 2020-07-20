@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:action="@{/test/add}" method="post" th:object="${test}">
+        <p>type: <input type="text" th:field="*{type}" /></p>
+		<p>chapterId: <input type="text" th:field="*{chapterId}" /></p>
+		<p>question: <input type="text" th:field="*{question}" /></p>
+		<p>iterns: <input type="text" th:field="*{iterns}" /></p>
+		<p>imgurl: <input type="text" th:field="*{imgurl}" /></p>
+		<p>rightAnswer: <input type="text" th:field="*{rightAnswer}" /></p>
+		<p>answerAnalysis: <input type="text" th:field="*{answerAnalysis}" /></p>
+		<p>extend: <input type="text" th:field="*{extend}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>
