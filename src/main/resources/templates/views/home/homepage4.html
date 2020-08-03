@@ -15,8 +15,8 @@
  
 </div>
 <div class="layui-btn-group demoTable">
-  <button class="layui-btn" data-type="getCheckData">新增</button>
-  
+  <button type="button"  data-method="offset" data-type="add" class="layui-btn layui-btn-normal">新增</button>
+
 </div>
 <table class="layui-table" lay-data="{width: 90%, height:330, url:'/demo/table/user/', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
@@ -44,23 +44,18 @@
 		<td th:text="${emp.imgurl}"></td>
 		<td th:text="${emp.rightAnswer}"></td>
 		<td th:text="${emp.answerAnalysis}"></td>
-		<td>
-		  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-		</td>
 	</tr>
   </tbody>
   
 </table>
 
-<!-- 
+
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script> 
- -->
+
 <script src="/layui/layui/layui.js" charset="utf-8"></script>
 <script>
 layui.use('table', function(){
@@ -85,10 +80,12 @@ layui.use('table', function(){
   });
   
   var $ = layui.$, active = {
-    getCheckData: function(){ //获取选中数据
-      var checkStatus = table.checkStatus('id')
-      ,data = checkStatus.data;
-      layer.alert(JSON.stringify(data));
+    add: function(){ //弹出新增页面
+    	layer.open({
+    		type: 2,
+    		area: ['80%', '80%'],
+    		content: '/form'
+    		});     
     }
   };
   
@@ -97,6 +94,7 @@ layui.use('table', function(){
     active[type] ? active[type].call(this) : '';
   });
 });
+
 </script>
 
 </body>

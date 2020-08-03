@@ -47,6 +47,11 @@ public class WebController {
 	   return "views/home/homepage4.html";
    }
    
+   @RequestMapping(value = "/form")
+   public String form(Model model) {
+	   return "views/home/form.html";
+   }
+   
    @RequestMapping(value = "/show")
    public String show(Model model) {
 	  model.addAttribute("uid","123456789");
