@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Thymeleaf示例</title>
+    </head> 
+    <body>
+        <h1>Thymeleaf 示例</h1>
+        Hello <span th:text="${name}"></span>!
+        <hr/>
+        <p th:text="${name}"></p>
+        <hr/>
+        <b th:text="${name}"></b>
+        
+        <div th:object="${test}">
+        	<p th:text="*{id}"></p>
+        </div>
+        
+        <a th:href="@{/test2}">点我</a>
+        
+        <li th:each="p : ${list}" th:text="${p.name}"/>
+        
+        <span th:if="${price1 > 100}">111</span>
+        <span th:if="${price2 > 100}">222</span>
+        
+        
+         <b th:text="${name + 'tyuiop'}"></b>
+         
+          <hr/>
+        <p th:text="${date}"></p>
+        <p th:text="${number}"></p>
+                  <hr/>
+        <p th:text="${#dates.format(date, 'yyyy-MM-dd')}"></p>
+        <p th:text="${#numbers.formatDecimal(number, 1,2)}">345</p>
+        
+        <hr/>
+        
+        <p class="answer" th:text="${4 * -6 * -2 % 7}">123</p>
+		<p class="answer" th:text="${new java.util.Date().getTime()}">22-Jun-2018</p>
+		<p class="answer" th:text="${T(java.lang.Math).random()}">123456</p>
+
+
+    </body>
+</html>
