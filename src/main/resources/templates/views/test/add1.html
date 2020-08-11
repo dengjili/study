@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>新增题目</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/layui/layui/css/layui.css" media="all"></head>
+<body>
+             
+<form class="layui-form" th:action="@{/test/add1}" method="post" th:object="${test}">
+
+    <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">题目类型</label>
+    <div class="layui-input-block">
+      <textarea  name="type"></textarea>
+    </div>
+  </div>
+    <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">题目章节</label>
+    <div class="layui-input-block">
+      <textarea  name="chapterId"></textarea>
+    </div>
+  </div>
+  
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">题目</label>
+    <div class="layui-input-block">
+    <textarea  name="question"></textarea>
+    <!-- <textarea placeholder="请输入内容" class="layui-textarea" name="question"></textarea>-->     
+     </div>
+  </div>
+  
+    <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">选项</label>
+    <div class="layui-input-block">
+      <textarea  name="iterns"></textarea>
+    </div>
+  </div>
+
+    <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">图片链接</label>
+    <div class="layui-input-block">
+      <textarea name="imgurl"></textarea>
+    </div>
+  </div>
+  
+      <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">正确答案</label>
+    <div class="layui-input-block">
+      <textarea  name="rightAnswer"></textarea>
+    </div>
+  </div>
+
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">答案解析</label>
+    <div class="layui-input-block">
+      <textarea name="answerAnalysis"></textarea>
+    </div>
+  </div>
+  
+    <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">扩展</label>
+    <div class="layui-input-block">
+      <textarea name="extend"></textarea>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button type="submit" value="Submit" id="submit" class="layui-btn" >提交</button>
+      <button type="reset" value="Reset" class="layui-btn " >重置</button>
+    </div>
+  </div>
+</form>
+       
+<script src="/layui/layui/layui.js" charset="utf-8"></script>
+
+</body>
+</html>

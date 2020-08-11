@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>table模块快速使用</title>
+  <title>数据显示页面</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +16,6 @@
 </div>
 <div class="layui-btn-group demoTable">
   <button type="button"  data-method="offset" data-type="add" class="layui-btn layui-btn-normal">新增</button>
-
 </div>
 <table class="layui-table" lay-data="{width: 90%, height:330, url:'/demo/table/user/', page:true, id:'idTest'}" lay-filter="demo">
   <thead>
@@ -30,30 +29,35 @@
       <th lay-data="{field:'urlimg'}">图片</th>
       <th lay-data="{field:'rightAnswer', width:200}">正确答案</th>
       <th lay-data="{field:'answerAnalysis', width:200}">答案解析</th>
-      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
+      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}">操作</th>
     </tr>
   </thead>
   <tbody>
-    <tr th:each="emp : ${data2}">
+    <tr th:each="q : ${data2}">
 		<td></td>
-		<td th:text="${emp.id}"></td>
-		<td th:text="${emp.type}"></td>
-		<td th:text="${emp.chapterId}"></td>
-		<td th:text="${emp.question}"></td>
-		<td th:text="${emp.iterns}"></td>
-		<td th:text="${emp.imgurl}"></td>
-		<td th:text="${emp.rightAnswer}"></td>
-		<td th:text="${emp.answerAnalysis}"></td>
+		<td th:text="${q.id}"></td>
+		<td th:text="${q.type}"></td>
+		<td th:text="${q.chapterId}"></td>
+		<td th:text="${q.question}"></td>
+		<td th:text="${q.iterns}"></td>
+		<td th:text="${q.imgurl}"></td>
+		<td th:text="${q.rightAnswer}"></td>
+		<td th:text="${q.answerAnalysis}"></td>
+		<!-- <td id="barDemo">
+		 <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+		  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		 		</td>		 --> 
 	</tr>
   </tbody>
   
 </table>
 
 
-<script type="text/html" id="barDemo">
+ <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" type="delete">删除</a>
 </script> 
 
 <script src="/layui/layui/layui.js" charset="utf-8"></script>
@@ -68,12 +72,22 @@ layui.use('table', function(){
   table.on('tool(demo)', function(obj){
     var data = obj.data;
     if(obj.event === 'detail'){
-      layer.msg('ID：'+ data.id + ' 的查看操作');
+      layer.msg( data.id);
     } else if(obj.event === 'del'){
-      layer.confirm('真的删除行么', function(index){
-        obj.del();
-        layer.close(index);
-      });
+    	layer.confirm('真的删除行么', function(obj){
+    		$.ajax({
+    			type : 'POST',
+                url: '/test/delete1?id=' + data.id,
+                success: function (d) {
+                  layer.msg("删除成功！");
+                  setTimeout(function () {location.href = '/test/list1';}, 1000);
+     			},error:function(d){
+     				layer.msg("删除失败！");
+     				setTimeout(function () {location.href = '/test/list1';}, 1000);
+     			}
+              })
+          });
+
     } else if(obj.event === 'edit'){
       layer.alert('编辑行：<br>'+ JSON.stringify(data))
     }
@@ -83,8 +97,17 @@ layui.use('table', function(){
     add: function(){ //弹出新增页面
     	layer.open({
     		type: 2,
-    		area: ['80%', '80%'],
-    		content: '/form'
+    		area: ['80%', '90%'],
+    		content: '/addUI',
+    		success:function(result){
+                 if(result == seccess){
+				      //当你在iframe页面关闭自身时
+	 	             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	                //layer信息提示
+	                layer.alter('添加成功');//下面是关键代码
+	 	            setTimeout(function () { parent.layer.close(index) }, 2000);//延迟
+                 }
+              }
     		});     
     }
   };
